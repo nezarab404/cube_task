@@ -1,5 +1,5 @@
 abstract final class AppImages {
-  static String hello = 'hello.png'.imageAssetsPath;
+  static String fallback = 'im_fallback.svg'.imageAssetsPath;
 }
 
 extension _ImagesPath on String {

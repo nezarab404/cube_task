@@ -7,9 +7,10 @@ import '../theme/app_colors.dart';
 import 'app_text.dart';
 
 class RefreshWidget extends StatelessWidget {
-  const RefreshWidget({super.key, required this.onRefresh});
+  const RefreshWidget({super.key, required this.onRefresh, this.error});
 
   final void Function() onRefresh;
+  final String? error;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,11 @@ class RefreshWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          if (error != null && error!.isNotEmpty)
+            AppText(
+              text: error!,
+              maxLines: 10,
+            ),
           TextButton.icon(
             onPressed: onRefresh,
             icon: Icon(

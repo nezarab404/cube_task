@@ -50,7 +50,7 @@ class CustomCachedImage extends StatelessWidget {
         errorWidget: (context, _, __) => ClipRRect(
           borderRadius: BorderRadius.circular(circleFallback ? 90 : 0),
           child: SvgPicture.asset(
-            AppImages.hello,
+            AppImages.fallback,
             fit: BoxFit.cover,
           ),
         ),

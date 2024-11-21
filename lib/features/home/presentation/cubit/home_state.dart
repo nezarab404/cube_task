@@ -6,6 +6,14 @@ final class HomeInitial extends HomeState {}
 
 final class HomeLoading extends HomeState {}
 
-final class HomeSuccess extends HomeState {}
+final class HomeSuccess extends HomeState {
+  final List<GifResponse> gifs;
 
-final class HomeFailed extends HomeState {}
+  HomeSuccess(this.gifs);
+}
+
+final class HomeFailed extends HomeState {
+  final String message;
+
+  HomeFailed(this.message);
+}
