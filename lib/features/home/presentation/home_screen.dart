@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 hint: 'Search for gif...',
                 onChange: (str) {
                   debouncer.run(() {
-                    context.read<HomeCubit>().getGifs();
+                    context.read<HomeCubit>().getGifs(isRefresh: true);
                   });
                 },
               ),

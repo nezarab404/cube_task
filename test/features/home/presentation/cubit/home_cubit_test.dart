@@ -66,7 +66,7 @@ main() {
         },
         act: (cubit) {
           cubit.searchController.text = testKeyword;
-          cubit.getGifs();
+          cubit.getGifs(limit: 10, position: 0);
         },
         expect: () => [
           isA<HomeLoading>(),
@@ -92,7 +92,10 @@ main() {
         },
         act: (cubit) {
           cubit.searchController.text = testKeyword;
-          cubit.getGifs();
+          cubit.getGifs(
+            limit: 10,
+            position: 0,
+          );
         },
         expect: () => [
           isA<HomeLoading>(),

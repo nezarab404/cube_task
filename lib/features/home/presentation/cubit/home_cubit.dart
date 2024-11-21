@@ -12,31 +12,65 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.getGifUseCase) : super(HomeInitial());
 
   final searchController = TextEditingController();
+  final scrollController = ScrollController();
+  var itemsPerPage = 15;
+  var _skip = 0;
+  var _hasMore = true;
+  List<GifResponse> gifs = [];
 
   getGifs({
-    int? limit = 10,
-    int? position = 0,
+    int? limit,
+    int? position,
+    bool isRefresh = false,
   }) async {
+    /// if we are refreshing then we will sending a force request
+    if (!isRefresh) {
+      /// if we already sending a request
+      if (state is HomeLoading) return;
+
+      /// if we get all the data, then do not send any other request
+      if (state is HomeSuccess && !(state as HomeSuccess).hasMore) return;
+    }
+
     if (searchController.text.trim().isEmpty) {
       return;
     }
-    emit(HomeLoading());
+    emit(HomeLoading(isRefresh));
+
+    if (isRefresh) {
+      _skip = 0;
+      _hasMore = true;
+      gifs = [];
+    }
     final result = await getGifUseCase.execute(
       searchQuery: searchController.text,
-      limit: limit,
-      position: position,
+      limit: limit ?? itemsPerPage,
+      position: position ?? _skip,
     );
     result.fold(
       (failure) {
         emit(HomeFailed(failure.message));
       },
       (data) {
-        emit(HomeSuccess(data));
+        gifs.addAll(data);
+        if (data.isEmpty) {
+          _hasMore = false;
+        }
+        _skip += itemsPerPage;
+        emit(HomeSuccess(gifs, _hasMore));
       },
     );
   }
 
+  void _onScrollListener() {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      getGifs();
+    }
+  }
+
   init() {
+    scrollController.addListener(_onScrollListener);
     getGifs();
   }
 }
