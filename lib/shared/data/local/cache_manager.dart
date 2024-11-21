@@ -29,7 +29,7 @@ class CacheManager {
     required String key,
     dynamic defaultValue,
   }) {
-    return _box.get(jsonDecode(key), defaultValue: defaultValue);
+    return jsonDecode(_box.get(key, defaultValue: defaultValue));
   }
 
   Future<void> clearData({

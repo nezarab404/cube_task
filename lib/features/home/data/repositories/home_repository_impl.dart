@@ -10,12 +10,14 @@ import '../../../../shared/data/network/api_response.dart';
 import '../../../../shared/utils/app_notifications.dart';
 
 import '../../../../shared/data/network/response_status.dart';
+import '../data_sources/cache/home_cache_data_source.dart';
 import '../data_sources/remote/home_remote_data_source.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
   final HomeRemoteDataSource services;
+  final HomeCacheDataSource cache;
 
-  HomeRepositoryImpl(this.services);
+  HomeRepositoryImpl(this.services, this.cache);
 
   @override
   Future<Either<Failure, List<GifResponse>>> getGifs({
@@ -30,12 +32,12 @@ class HomeRepositoryImpl extends HomeRepository {
       position,
     );
     if (response.hasSucceeded) {
+      await cache.storeGifs(response.data!.results);
       return Right(response.data!.results);
     } else {
       if (response.errorData?.code == ResponseStatus.noConnection) {
-        // Todo return cached items
         AppNotifications.showError(message: response.errorMessage ?? '');
-        return const Right([]);
+        return Right(cache.getStoredGifs());
       }
       return Left(ServerFailure(response.errorMessage ?? ''));
     }

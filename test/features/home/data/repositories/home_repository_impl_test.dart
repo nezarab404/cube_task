@@ -13,11 +13,13 @@ import '../../../../helpers/test_helper.mocks.dart';
 
 main() {
   late MockHomeRemoteDataSource dataSource;
+  late MockHomeCacheDataSource cache;
   late HomeRepositoryImpl homeRepositoryImpl;
 
   setUp(() {
     dataSource = MockHomeRemoteDataSource();
-    homeRepositoryImpl = HomeRepositoryImpl(dataSource);
+    cache = MockHomeCacheDataSource();
+    homeRepositoryImpl = HomeRepositoryImpl(dataSource, cache);
   });
 
   GifResponseData testModel = GifResponseData(
@@ -52,6 +54,9 @@ main() {
         when(dataSource.getGifs(testKeyword, apiKey, 1, 1)).thenAnswer(
           (_) async => ApiResponse<GifResponseData>.completed(testModel),
         );
+        when(cache.storeGifs(testModel.results)).thenAnswer(
+          (_) async => true,
+        );
         //act
         final result = await homeRepositoryImpl.getGifs(
           searchQuery: testKeyword,
@@ -72,6 +77,9 @@ main() {
           (_) async => ApiResponse<GifResponseData>.error(
             errorMessage: errorMessage,
           ),
+        );
+        when(cache.storeGifs(testModel.results)).thenAnswer(
+              (_) async => true,
         );
         //act
         final result = await homeRepositoryImpl.getGifs(

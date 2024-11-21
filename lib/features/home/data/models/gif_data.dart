@@ -20,4 +20,6 @@ class GifData {
 
   factory GifData.fromJson(Map<String, dynamic> json) =>
       _$GifDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GifDataToJson(this);
 }

@@ -1,5 +1,7 @@
 import 'package:cube_task/features/home/domain/usecases/get_gifs_use_case.dart';
+import 'package:cube_task/shared/data/local/cache_manager.dart';
 
+import '../../features/home/data/data_sources/cache/home_cache_data_source.dart';
 import '../../features/home/data/repositories/home_repository_impl.dart';
 import '../../features/home/domain/repositories/home_repository.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
@@ -19,6 +21,7 @@ class AppDI {
   static setup() async {
     await _setupLocalStorage();
     _injectNetworkingDependencies();
+    _injectLocaleDataSources();
     _injectRepositories();
     _injectUseCases();
     _injectCubits();
@@ -26,7 +29,7 @@ class AppDI {
 
   static _injectRepositories() {
     getIt.registerLazySingleton<HomeRepository>(
-        () => HomeRepositoryImpl(getIt()));
+        () => HomeRepositoryImpl(getIt(), getIt()));
   }
 
   static _injectUseCases() {
@@ -59,5 +62,10 @@ class AppDI {
     final dio = _injectDio();
     final baseUrl = dotenv.get(DotenvKeys.baseUrl);
     _injectApiServices(dio, baseUrl);
+  }
+
+  static void _injectLocaleDataSources() {
+    getIt.registerLazySingleton<HomeCacheDataSource>(
+        () => HomeCacheDataSource());
   }
 }
