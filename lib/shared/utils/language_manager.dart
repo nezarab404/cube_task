@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:restart/restart.dart';
 
 import '../data/local/local_storage.dart';
 import '../di/app_di.dart';
@@ -19,7 +18,6 @@ abstract class LanguagesManager {
     if (allLocales.contains(locale)) {
       context.setLocale(locale);
       getIt.get<LocalStorage>().storeLanguage(locale.toStringWithSeparator());
-      restart();
     } else {
       throw Exception('App does not support this locale');
     }
