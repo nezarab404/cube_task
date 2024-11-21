@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'error_response.dart';
@@ -37,12 +38,9 @@ class ApiResponse<T> {
       }
       return ApiResponse.completed(fromJsonT(json));
     } catch (error) {
-      // if (error is JsonObjectSerializeException) {
-      //   return ApiResponse.error(
-      //     errorMessage: error.message,
-      //   );
-      // } else {
-      print('the catched error is : $error');
+      if (kDebugMode) {
+        print('the catched error is : $error');
+      }
       return ApiResponse.error(
         errorMessage: error.toString(),
       );
