@@ -4,9 +4,9 @@ part 'gif_data.g.dart';
 
 @JsonSerializable()
 class GifData {
-  num size;
+  num? size;
   List<int> dims;
-  num duration;
+  num? duration;
   String url;
   String preview;
 

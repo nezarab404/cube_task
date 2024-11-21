@@ -1,5 +1,6 @@
 import 'package:cube_task/features/home/data/models/gif_response.dart';
 import 'package:cube_task/features/home/domain/usecases/get_gifs_use_case.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,10 +11,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this.getGifUseCase) : super(HomeInitial());
 
+  final searchController = TextEditingController();
+
   getGifs() async {
     emit(HomeLoading());
     final result = await getGifUseCase.execute(
-      searchQuery: 'gg',
+      searchQuery: searchController.text,
       limit: 10,
     );
     result.fold(

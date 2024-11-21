@@ -19,6 +19,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.focusNode,
     this.onTap,
+    this.onChange,
   });
 
   final TextEditingController? controller;
@@ -32,6 +33,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final FocusNode? focusNode;
   final void Function()? onTap;
+  final void Function(String)? onChange;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -50,6 +52,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: widget.onTap,
+      onChanged: widget.onChange,
       textAlignVertical: TextAlignVertical.center,
       controller: widget.controller,
       focusNode: widget.focusNode,

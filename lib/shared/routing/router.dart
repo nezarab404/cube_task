@@ -35,7 +35,7 @@ class AppRouter {
             builder: (BuildContext context, GoRouterState state) {
               return BlocProvider<HomeCubit>(
                 create: (context) => getIt.get<HomeCubit>(),
-                child: const HomeScreen(),
+                child: HomeScreen(),
               );
             },
           ),
