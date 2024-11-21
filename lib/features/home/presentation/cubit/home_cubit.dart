@@ -13,14 +13,18 @@ class HomeCubit extends Cubit<HomeState> {
 
   final searchController = TextEditingController();
 
-  getGifs() async {
+  getGifs({
+    int? limit = 10,
+    int? position = 0,
+  }) async {
     if (searchController.text.trim().isEmpty) {
       return;
     }
     emit(HomeLoading());
     final result = await getGifUseCase.execute(
       searchQuery: searchController.text,
-      limit: 10,
+      limit: limit,
+      position: position,
     );
     result.fold(
       (failure) {

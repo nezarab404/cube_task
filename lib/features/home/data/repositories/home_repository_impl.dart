@@ -23,18 +23,17 @@ class HomeRepositoryImpl extends HomeRepository {
     int? limit = 10,
     int? position = 0,
   }) async {
-    final apiKey = dotenv.get(DotenvKeys.key);
     ApiResponse<GifResponseData> response = await services.getGifs(
       searchQuery,
-      apiKey,
+      'LIVDSRZULELA',
       limit,
       position,
     );
     if (response.hasSucceeded) {
       return Right(response.data!.results);
     } else {
-      print("in repo : ${response.errorMessage}");
       if (response.errorData?.code == ResponseStatus.noConnection) {
+        // Todo return cached items
         AppNotifications.showError(message: response.errorMessage ?? '');
         return const Right([]);
       }

@@ -9,11 +9,8 @@ class GetGifUseCase {
 
   GetGifUseCase(this.homeRepository);
 
-  Future<Either<Failure, List<GifResponse>>> execute({
-    required String searchQuery,
-    int? limit,
-    int? position
-  }) async {
+  Future<Either<Failure, List<GifResponse>>> execute(
+      {required String searchQuery, int? limit, int? position}) async {
     return homeRepository.getGifs(
       searchQuery: searchQuery,
       limit: limit,
