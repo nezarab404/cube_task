@@ -1,4 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cube_task/features/home/data/models/gif_response.dart';
+import 'package:cube_task/features/home/presentation/pages/gif_details.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../di/app_di.dart';
 import 'package:flutter/material.dart';
@@ -37,9 +39,16 @@ class AppRouter {
               );
             },
           ),
+          GoRoute(
+            path: RoutesPaths.gifDetails,
+            builder: (BuildContext context, GoRouterState state) {
+              return GifDetails(
+                gif: state.extra as GifResponse,
+              );
+            },
+          ),
         ],
       );
-
 
   static bool canPop() => getRouter.canPop();
 
@@ -47,14 +56,13 @@ class AppRouter {
       getRouter.push<T>(location, extra: extra);
 
   static Future<T?> pushReplacement<T extends Object?>(String location,
-      {Object? extra}) =>
+          {Object? extra}) =>
       getRouter.pushReplacement<T>(location, extra: extra);
 
   static go(String location, {Object? extra}) =>
       getRouter.go(location, extra: extra);
 
   static pop<T extends Object?>([T? result]) => getRouter.pop<T?>(result);
-
 }
 
 extension GoRouterPopUntil on GoRouter {
