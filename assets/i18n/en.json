@@ -1,0 +1,11 @@
+{
+  "home": "Home",
+  "no_connection": "There is no internet connection",
+  "email_validation_message": "Please enter a valid email",
+  "phone_validation_message": "Please enter a valid phone number",
+  "password_validation_message": "Password length must be 8 at least",
+  "name_validation_message": "Name should be at least 3 characters",
+  "confirm_password_validation": "Passwords does not match",
+  "pin_validation": "OTP code should be 4 characters",
+  "try_again": "Try again"
+}

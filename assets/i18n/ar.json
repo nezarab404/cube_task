@@ -1,0 +1,11 @@
+{
+  "home": "الرئيسية",
+  "no_connection": "لا يوجد إتصال بالإنترنت",
+  "email_validation_message": "الرجاء إدخال بريد الكتروني صحيح",
+  "phone_validation_message": "الرجاء إدخال رقم هاتف صحيح",
+  "password_validation_message": "طول كلمة المرور يجب ان يكون 8 قلى الأقل",
+  "name_validation_message": "يجب ان يتكون الاسم من ثلاثة حروف على الاقل",
+  "confirm_password_validation": "كلمات السر غير متطابقة",
+  "pin_validation": "يجب ان يتكون الرمز من 4 خانات",
+  "try_again" : "إعادة المحاولة"
+}
