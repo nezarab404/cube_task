@@ -1,11 +1,14 @@
-import '../../features/home/data/repositories/home_repo.dart';
+import 'package:cube_task/features/home/domain/usecases/get_gifs_use_case.dart';
+
+import '../../features/home/data/repositories/home_repository_impl.dart';
+import '../../features/home/domain/repositories/home_repository.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/home/data/data_sources/remote/home_data_source.dart';
+import '../../features/home/data/data_sources/remote/home_remote_data_source.dart';
 import '../data/local/local_storage.dart';
 import '../data/network/interceptor.dart';
 import '../utils/dotenv_keys.dart';
@@ -21,15 +24,18 @@ class AppDI {
     _injectCubits();
   }
 
-  static _injectCubits() {
-    getIt.registerFactory(() => HomeCubit(getIt()));
-  }
-
   static _injectRepositories() {
-    getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
+    getIt.registerLazySingleton<HomeRepository>(
+        () => HomeRepositoryImpl(getIt()));
   }
 
-  static _injectUseCases() {}
+  static _injectUseCases() {
+    getIt.registerLazySingleton<GetGifUseCase>(() => GetGifUseCase(getIt()));
+  }
+
+  static _injectCubits() {
+    getIt.registerFactory(() => HomeCubit(getIt())..init());
+  }
 
   static Future _setupLocalStorage() async {
     final pref = await SharedPreferences.getInstance();
@@ -45,8 +51,8 @@ class AppDI {
   }
 
   static _injectApiServices(Dio dio, String baseUrl) {
-    getIt.registerLazySingleton<HomeDataSource>(
-        () => HomeDataSource(dio, baseUrl: baseUrl));
+    getIt.registerLazySingleton<HomeRemoteDataSource>(
+        () => HomeRemoteDataSource(dio, baseUrl: baseUrl));
   }
 
   static _injectNetworkingDependencies() {
