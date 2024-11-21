@@ -7,6 +7,7 @@ import '../../../../shared/components/app_text.dart';
 import '../../../../shared/components/loading_widget.dart';
 import '../../../../shared/components/refresh_widget.dart';
 import 'gif_card.dart';
+import 'initial_state_widget.dart';
 
 class GifsGrid extends StatelessWidget {
   const GifsGrid({super.key});
@@ -18,9 +19,7 @@ class GifsGrid extends StatelessWidget {
         final cubit = context.read<HomeCubit>();
         final gifs = cubit.gifs;
         if (state is HomeInitial) {
-          return const Center(
-            child: AppText(text: 'Search for a GIF !'),
-          );
+          return const InitialStateWidget();
         }
         if (state is HomeLoading && state.isRefresh) {
           return const LoadingWidget();
@@ -44,16 +43,12 @@ class GifsGrid extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               if (state is HomeLoading && index == gifs.length) {
-                return SizedBox(
-                  width: 50.w,
-                  height: 50.w,
-                  child: const CircularProgressIndicator(),
-                );
+                return const LoadingWidget();
               }
               if (state is HomeSuccess &&
                   !state.hasMore &&
                   index == state.gifs.length) {
-                return const Text('NoMoreItemsWidget');
+                return const AppText(text: 'No More Items');
               }
               return GifCard(gifResponse: gifs[index]);
             },
