@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../shared/components/app_text.dart';
 import '../../../../shared/components/loading_widget.dart';
 import '../../../../shared/components/refresh_widget.dart';
 import 'gif_card.dart';
@@ -16,7 +17,9 @@ class GifsGrid extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<HomeCubit>();
         return switch (state) {
-          HomeInitial() => const LoadingWidget(),
+          HomeInitial() => const Center(
+              child: AppText(text: 'Search for a GIF !'),
+            ),
           HomeLoading() => const LoadingWidget(),
           HomeSuccess() => RefreshIndicator(
               onRefresh: () async {

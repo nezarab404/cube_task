@@ -8,7 +8,7 @@ import 'app_text.dart';
 abstract final class CustomAppBar {
   static AppBar createAppBar({
     required String title,
-    bool hideLeading = false,
+    bool hideLeading = true,
     List<Widget> actions = const [],
   }) =>
       AppBar(
@@ -17,7 +17,7 @@ abstract final class CustomAppBar {
         ),
         centerTitle: true,
         backgroundColor: AppColors.primary,
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         actions: actions,
         leading: hideLeading
             ? null

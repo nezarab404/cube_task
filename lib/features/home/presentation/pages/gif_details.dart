@@ -24,7 +24,10 @@ class GifDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.createAppBar(title: 'Gif Details'),
+      appBar: CustomAppBar.createAppBar(
+        title: 'Gif Details',
+        hideLeading: false,
+      ),
       body: Padding(
         padding: UIHelper.pagePadding,
         child: Column(
@@ -32,8 +35,7 @@ class GifDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-                flex: 2,
-                child: CustomCachedImage(url: gif.media[0].gif.url)),
+                flex: 2, child: CustomCachedImage(url: gif.media[0].gif.url)),
             UIHelper.verticalSpaceMedium(),
             Expanded(
               flex: 1,
