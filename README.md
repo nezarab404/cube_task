@@ -22,3 +22,14 @@ dart run easy_localization:generate --source-dir ./assets/i18n/;dart run easy_lo
 ---
 
 - **Note: For task purposes only I kept the `.env` file without ignore it from git.**
+
+
+### Features
+- API Integration
+- UI/UX
+- Navigation
+- Error Handling
+- Unit Testing
+- Advanced UI/UX: Infinite scrolling, dark mode
+- Caching: Cache GIFs to reduce API calls.
+- Localization: Support at least two languages.
