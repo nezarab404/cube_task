@@ -7,5 +7,12 @@
   "name_validation_message": "يجب ان يتكون الاسم من ثلاثة حروف على الاقل",
   "confirm_password_validation": "كلمات السر غير متطابقة",
   "pin_validation": "يجب ان يتكون الرمز من 4 خانات",
-  "try_again" : "إعادة المحاولة"
+  "try_again": "إعادة المحاولة",
+  "settings": "الإعدادات",
+  "language": "اللغة",
+  "change_language": "Change to English",
+  "search_for_gif": "البحث عن gif ...",
+  "no_more_items": "لا يوجد عناصر بعد",
+  "search_for_a_GIF": "إبحث عن GIF الآن!",
+  "gif_details": "تفاصيل ال GIF"
 }

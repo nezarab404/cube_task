@@ -7,5 +7,12 @@
   "name_validation_message": "Name should be at least 3 characters",
   "confirm_password_validation": "Passwords does not match",
   "pin_validation": "OTP code should be 4 characters",
-  "try_again": "Try again"
+  "try_again": "Try again",
+  "settings": "Settings",
+  "language": "Language",
+  "change_language": "التغيير للعربية",
+  "search_for_gif": "Search for gif...",
+  "no_more_items": "No More Items",
+  "search_for_a_GIF": "Search for a GIF Now!",
+  "gif_details" : "Gif Details"
 }

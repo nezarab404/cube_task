@@ -1,7 +1,9 @@
+import 'package:cube_task/generated/locale_keys.g.dart';
 import 'package:cube_task/shared/components/app_text.dart';
 import 'package:cube_task/shared/components/custom_app_bar.dart';
 import 'package:cube_task/shared/components/custom_cached_image.dart';
 import 'package:cube_task/shared/utils/ui_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/routing/router.dart';
@@ -25,7 +27,7 @@ class GifDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.createAppBar(
-        title: 'Gif Details',
+        title: LocaleKeys.gif_details.tr(),
         hideLeading: false,
       ),
       body: Padding(

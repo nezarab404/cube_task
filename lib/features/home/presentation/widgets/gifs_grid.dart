@@ -1,4 +1,6 @@
 import 'package:cube_task/features/home/presentation/cubit/home_cubit.dart';
+import 'package:cube_task/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +50,7 @@ class GifsGrid extends StatelessWidget {
               if (state is HomeSuccess &&
                   !state.hasMore &&
                   index == state.gifs.length) {
-                return const AppText(text: 'No More Items');
+                return AppText(text: LocaleKeys.no_more_items.tr());
               }
               return GifCard(gifResponse: gifs[index]);
             },

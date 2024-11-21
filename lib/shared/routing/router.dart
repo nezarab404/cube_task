@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cube_task/features/home/data/models/gif_response.dart';
 import 'package:cube_task/features/home/presentation/pages/gif_details.dart';
+import 'package:cube_task/features/settings/presentation/settings_screen.dart';
 import '../../features/home/presentation/cubit/home_cubit.dart';
 import '../di/app_di.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,12 @@ class AppRouter {
               return GifDetails(
                 gif: state.extra as GifResponse,
               );
+            },
+          ),
+          GoRoute(
+            path: RoutesPaths.settings,
+            builder: (BuildContext context, GoRouterState state) {
+              return const SettingsScreen();
             },
           ),
         ],
