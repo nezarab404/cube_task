@@ -31,16 +31,22 @@ class BaseApp extends StatelessWidget {
           BuildContext context,
           Widget? widgetChild,
         ) =>
-            MaterialApp.router(
-          title: 'Base App',
-          theme: AppThemes.lightTheme,
-          darkTheme: AppThemes.darkTheme,
-          builder: BotToastInit(),
-          locale: context.locale,
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
-          routerConfig: AppRouter.getRouter,
-          debugShowCheckedModeBanner: false,
+            ValueListenableBuilder<ThemeMode>(
+          valueListenable: AppThemes.themeNotifier,
+          builder: (BuildContext context, ThemeMode value, Widget? child) {
+            return MaterialApp.router(
+              title: 'Gif Task',
+              theme: AppThemes.lightTheme,
+              darkTheme: AppThemes.darkTheme,
+              themeMode: value,
+              builder: BotToastInit(),
+              locale: context.locale,
+              supportedLocales: context.supportedLocales,
+              localizationsDelegates: context.localizationDelegates,
+              routerConfig: AppRouter.getRouter,
+              debugShowCheckedModeBanner: false,
+            );
+          },
         ),
       ),
     );

@@ -1,21 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //TODO : Secure with flutter_secure_storage
 class LocalStorage {
-  static const String _tokenKey = 'token';
   static const String _languageKey = 'language';
+  static const String _themeKey = 'theme';
 
   final SharedPreferences _sharedPreferences;
 
   LocalStorage(this._sharedPreferences);
-
-  Future<bool> storeToken(String token) async {
-    return _sharedPreferences.setString(_tokenKey, token);
-  }
-
-  String? get token => _sharedPreferences.getString(_tokenKey);
-
-  Future<bool> clearToken() async => _sharedPreferences.remove(_tokenKey);
 
   Future<bool> storeLanguage(String lang) async =>
       _sharedPreferences.setString(_languageKey, lang);
@@ -23,4 +16,11 @@ class LocalStorage {
   String? get language => _sharedPreferences.getString(_languageKey);
 
   Future<bool> clearLanguage() async => _sharedPreferences.remove(_languageKey);
+
+  Future<bool> storeTheme(int theme) async =>
+      _sharedPreferences.setInt(_themeKey, theme);
+
+  int get theme => _sharedPreferences.getInt(_themeKey) ?? 0;
+
+  Future<bool> clearTheme() async => _sharedPreferences.remove(_themeKey);
 }

@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../data/local/local_storage.dart';
+import '../di/app_di.dart';
 import 'app_colors.dart';
 
 abstract final class AppThemes {
+  static ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(_getThemeFromIndex(getIt<LocalStorage>().theme));
+
+  static changeThemeMode(ThemeMode mode) {
+    themeNotifier.value = mode;
+    getIt<LocalStorage>().storeTheme(_getIndexFromTheme(mode));
+  }
+
+  static _getIndexFromTheme(ThemeMode mode) => switch (mode) {
+        ThemeMode.system => 0,
+        ThemeMode.light => 1,
+        ThemeMode.dark => 2,
+      };
+
+  static _getThemeFromIndex(int index) {
+    if (index == 0) return ThemeMode.system;
+    if (index == 1) return ThemeMode.light;
+    if (index == 2) return ThemeMode.dark;
+  }
+
   static ThemeData get lightTheme => ThemeData(
         primarySwatch: AppColors.primary.toMaterialColor(),
         brightness: Brightness.light,
@@ -113,5 +135,4 @@ abstract final class AppThemes {
           color: AppColors.primary,
         ),
       );
-
 }
