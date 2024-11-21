@@ -28,7 +28,7 @@ abstract final class CustomAppBar {
                 icon: Icon(
                   Icons.arrow_back_ios,
                   color: AppColors.white,
-                  size: 20.sp,
+                  size: kDefaultFontSize.sp,
                 ),
               ),
         toolbarHeight: kToolbarHeight.h,
@@ -38,7 +38,7 @@ abstract final class CustomAppBar {
     return AppText(
       text: title,
       color: AppColors.white,
-      fontSize: 20,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
     );
   }

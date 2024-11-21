@@ -23,8 +23,8 @@ class GifsGrid extends StatelessWidget {
                 context.read<HomeCubit>().getGifs();
               },
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: MediaQuery.sizeOf(context).height / 3,
                   crossAxisSpacing: 10.w,
                   mainAxisSpacing: 10.w,
                 ),

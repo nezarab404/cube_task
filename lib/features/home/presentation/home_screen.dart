@@ -34,6 +34,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               CustomTextField(
                 controller: context.read<HomeCubit>().searchController,
+                hint: 'Search for gif...',
                 onChange: (str) {
                   debouncer.run(() {
                     context.read<HomeCubit>().getGifs();

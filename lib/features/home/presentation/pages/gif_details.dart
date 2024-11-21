@@ -31,12 +31,17 @@ class GifDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomCachedImage(url: gif.media[0].gif.url),
+            Expanded(
+                flex: 2,
+                child: CustomCachedImage(url: gif.media[0].gif.url)),
             UIHelper.verticalSpaceMedium(),
-            AppText(
-              text: gif.contentDescription,
-              fontSize: 14,
-              maxLines: 5,
+            Expanded(
+              flex: 1,
+              child: AppText(
+                text: gif.contentDescription,
+                fontSize: 14,
+                maxLines: 5,
+              ),
             ),
           ],
         ),
